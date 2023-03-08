@@ -30,6 +30,13 @@ describe("Todo List Test Suite", () => {
       },
     ].forEach(add);
   });
+  
+  test("Should mark a todo as complete", () => {
+    expect(all[0].completed).toEqual(false);
+    markAsComplete(0);
+    expect(all[0].completed).toEqual(true);
+  });
+  
   test("Should add a new todo", () => {
     expect(all.length).toEqual(3);
 
@@ -41,13 +48,7 @@ describe("Todo List Test Suite", () => {
 
     expect(all.length).toEqual(4);
   });
-
-  test("Should mark a todo as complete", () => {
-    expect(all[0].completed).toEqual(false);
-    markAsComplete(0);
-    expect(all[0].completed).toEqual(true);
-  });
-
+  
   test("Should retrieve overdue items", () => {
     expect(overdue().length).toEqual(1);
   });

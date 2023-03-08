@@ -1,6 +1,5 @@
-// todo.js
 const todoList = () => {
-  let all = [];
+  all = [];
   const add = (todoItem) => {
     all.push(todoItem);
   };
@@ -10,22 +9,41 @@ const todoList = () => {
 
   const overdue = () => {
     return all.filter(
-      (item) => item.dueDate < new Date().toLocaleDateString("en-CA")
+      (todo) => todo.dueDate < new Date().toLocaleDateString("en-CA")
     );
   };
 
   const dueToday = () => {
     return all.filter(
-      (item) => item.dueDate === new Date().toLocaleDateString("en-CA")
+      (todo) => todo.dueDate === new Date().toLocaleDateString("en-CA")
     );
   };
 
   const dueLater = () => {
     return all.filter(
-      (item) => item.dueDate > new Date().toLocaleDateString("en-CA")
+      (todo) => todo.dueDate > new Date().toLocaleDateString("en-CA")
     );
   };
-  return { all, add, markAsComplete, overdue, dueToday, dueLater };
+
+  const toDisplayableList = (list) => {
+    return list
+      .map(
+        (todo) =>
+          `${todo.completed ? "[x]" : "[ ]"} ${todo.title} ${
+            todo.dueDate == today ? "" : todo.dueDate
+          }`
+      )
+      .join("\n");
+  };
+  return {
+    all,
+    add,
+    markAsComplete,
+    overdue,
+    dueToday,
+    dueLater,
+    toDisplayableList,
+  };
 };
 
 module.exports = todoList;
